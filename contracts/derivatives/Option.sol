@@ -61,6 +61,8 @@ contract OptionsOTC {
         uint256 price,
         uint256 quantity
     ) public {
+        // approve 100 tokens that the contract can transfer
+
         uint256 claimBlock = block.number + 10;
 
         require(
@@ -79,6 +81,9 @@ contract OptionsOTC {
         OptType t,
         uint256 strike
     ) public payable {
+        // provided all conditions are satisfied (in the money, etc.) pay the
+        // market maker and transfer ether from the buyer to the market maker
+
         Order storage o = orders[keccak256(
             abi.encodePacked("TOK", expiryBlock, t, strike)
         )];

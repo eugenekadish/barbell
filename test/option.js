@@ -9,11 +9,11 @@ contract('Option', (accounts) => {
 
             let receipt, allowance = {};
 
-            marketMaker = accounts[0];
+            tokenAdmin = accounts[0];
+            marketMaker = accounts[1];
 
-            tokenAdmin = accounts[1];
-            optionAdmin = accounts[3];
-            optionBuyer = accounts[4];
+            optionAdmin = accounts[2];
+            optionBuyer = accounts[3];
 
             // tokenInstance = await Token.at(0x3f80fe03f80fe03f80fe03f80fe03f8);
             // tokenInstance = await Token.at(0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599);
