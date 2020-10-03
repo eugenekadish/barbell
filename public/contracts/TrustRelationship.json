@@ -1,0 +1,3480 @@
+{
+  "contractName": "TrustRelationship",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "ownerKey",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "signingKey",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "attrID",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "name": "badgeID",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "name": "creationBlock",
+          "type": "uint256"
+        }
+      ],
+      "name": "BadgeStateResetEvent",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "ownerKey",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "signingKey",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "attrID",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "name": "badgeID",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "name": "creationBlock",
+          "type": "uint256"
+        }
+      ],
+      "name": "AttributeProofChangeEvent",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "ownerKey",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "signingKey",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "badgeID",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "name": "state",
+          "type": "uint8"
+        },
+        {
+          "indexed": false,
+          "name": "creationBlock",
+          "type": "uint256"
+        }
+      ],
+      "name": "TrustRelationshipSignEvent",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "ownerKey",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "signingKey",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "badgeID",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "name": "creationBlock",
+          "type": "uint256"
+        }
+      ],
+      "name": "TrustRelationshipCreatedEvent",
+      "type": "event"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.8+commit.23d335f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"ownerKey\",\"type\":\"address\"},{\"indexed\":true,\"name\":\"signingKey\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"attrID\",\"type\":\"string\"},{\"indexed\":false,\"name\":\"badgeID\",\"type\":\"string\"},{\"indexed\":false,\"name\":\"creationBlock\",\"type\":\"uint256\"}],\"name\":\"BadgeStateResetEvent\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"ownerKey\",\"type\":\"address\"},{\"indexed\":true,\"name\":\"signingKey\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"attrID\",\"type\":\"string\"},{\"indexed\":false,\"name\":\"badgeID\",\"type\":\"string\"},{\"indexed\":false,\"name\":\"creationBlock\",\"type\":\"uint256\"}],\"name\":\"AttributeProofChangeEvent\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"ownerKey\",\"type\":\"address\"},{\"indexed\":true,\"name\":\"signingKey\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"badgeID\",\"type\":\"string\"},{\"indexed\":false,\"name\":\"state\",\"type\":\"uint8\"},{\"indexed\":false,\"name\":\"creationBlock\",\"type\":\"uint256\"}],\"name\":\"TrustRelationshipSignEvent\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"ownerKey\",\"type\":\"address\"},{\"indexed\":true,\"name\":\"signingKey\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"badgeID\",\"type\":\"string\"},{\"indexed\":false,\"name\":\"creationBlock\",\"type\":\"uint256\"}],\"name\":\"TrustRelationshipCreatedEvent\",\"type\":\"event\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/eugene/Documents/cryptocurrency/barbell/contracts/TrustRelationship.sol\":\"TrustRelationship\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/eugene/Documents/cryptocurrency/barbell/contracts/TrustRelationship.sol\":{\"keccak256\":\"0xad0028ed80e9d341bc0f9c6360d1370c1b214f2552ac11b9a62507bd67495297\",\"urls\":[\"bzzr://82cfceb722ccbf8ca779685c8e7f114b7b7ac7e5d968261c8e4e02742419c8e4\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50604380601d6000396000f3fe6080604052600080fdfea265627a7a7230582015c4d8b3edcaeea795ce0448ebd970f3a26898c30e199af7b1a31edc87b1cab46c6578706572696d656e74616cf50037",
+  "deployedBytecode": "0x6080604052600080fdfea265627a7a7230582015c4d8b3edcaeea795ce0448ebd970f3a26898c30e199af7b1a31edc87b1cab46c6578706572696d656e74616cf50037",
+  "sourceMap": "59:1796:3:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;59:1796:3;;;;;;;",
+  "deployedSourceMap": "59:1796:3:-;;;;;",
+  "source": "pragma solidity ^0.5.0;\npragma experimental ABIEncoderV2;\n\ncontract TrustRelationship {\n\n    struct Attestation {\n        string attrID;\n\n        string proof;\n        string hashAlgo;\n\n        bytes metadata;\n        string encoding;\n    }\n\n    struct Attribute {\n        bytes metadata;\n        string encoding;\n\n        string proof;\n        string hashAlgo;\n\n        bool shared;\n    }\n\n    string[] badgesList;\n    enum SignatureStates { PENDING, REJECTED, VERIFIED, VALID, TERMINATED }\n\n    struct BadgeView {\n        bytes metadata;\n        string encoding;\n        address signingKey;\n\n        SignatureStates state;\n        string[] attributeList;\n    }\n\n    struct Badge {\n        bytes metadata;\n        string encoding;\n        address signingKey;\n\n        SignatureStates state; // default is PENDING\n\n        string[] attributeList;\n        mapping (string => Attribute) attributes;\n    }\n\n    mapping (string => Badge) Badges;\n\n    modifier isTrustedSigner(string memory badgeID) {\n        Badge storage b = Badges[badgeID];\n\n        require (\n            msg.sender == b.signingKey,\n            \"AccessDenied: Caller is not the designated Trusted Signer!\"\n        );\n\n        _;\n    }\n\n    event BadgeStateResetEvent(\n        address indexed ownerKey, address indexed signingKey,\n        string attrID, string badgeID, uint creationBlock\n    );\n\n    event AttributeProofChangeEvent(\n        address indexed ownerKey, address indexed signingKey,\n        string attrID, string badgeID, uint creationBlock\n    );\n\n    event TrustRelationshipSignEvent(\n        address indexed ownerKey, address indexed signingKey,\n        string badgeID, SignatureStates state, uint creationBlock\n    );\n\n    event TrustRelationshipCreatedEvent(\n        address indexed ownerKey, address indexed signingKey,\n        string badgeID, uint creationBlock\n    );\n}\n",
+  "sourcePath": "/home/eugene/Documents/cryptocurrency/barbell/contracts/TrustRelationship.sol",
+  "ast": {
+    "absolutePath": "/home/eugene/Documents/cryptocurrency/barbell/contracts/TrustRelationship.sol",
+    "exportedSymbols": {
+      "TrustRelationship": [
+        1112
+      ]
+    },
+    "id": 1113,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 980,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:3"
+      },
+      {
+        "id": 981,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "24:33:3"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 1112,
+        "linearizedBaseContracts": [
+          1112
+        ],
+        "name": "TrustRelationship",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "TrustRelationship.Attestation",
+            "id": 992,
+            "members": [
+              {
+                "constant": false,
+                "id": 983,
+                "name": "attrID",
+                "nodeType": "VariableDeclaration",
+                "scope": 992,
+                "src": "122:13:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 982,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "122:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 985,
+                "name": "proof",
+                "nodeType": "VariableDeclaration",
+                "scope": 992,
+                "src": "146:12:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 984,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "146:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 987,
+                "name": "hashAlgo",
+                "nodeType": "VariableDeclaration",
+                "scope": 992,
+                "src": "168:15:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 986,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "168:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 989,
+                "name": "metadata",
+                "nodeType": "VariableDeclaration",
+                "scope": 992,
+                "src": "194:14:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_storage_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 988,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "194:5:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 991,
+                "name": "encoding",
+                "nodeType": "VariableDeclaration",
+                "scope": 992,
+                "src": "218:15:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 990,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "218:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Attestation",
+            "nodeType": "StructDefinition",
+            "scope": 1112,
+            "src": "93:147:3",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "TrustRelationship.Attribute",
+            "id": 1003,
+            "members": [
+              {
+                "constant": false,
+                "id": 994,
+                "name": "metadata",
+                "nodeType": "VariableDeclaration",
+                "scope": 1003,
+                "src": "273:14:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_storage_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 993,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "273:5:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 996,
+                "name": "encoding",
+                "nodeType": "VariableDeclaration",
+                "scope": 1003,
+                "src": "297:15:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 995,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "297:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 998,
+                "name": "proof",
+                "nodeType": "VariableDeclaration",
+                "scope": 1003,
+                "src": "323:12:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 997,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "323:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1000,
+                "name": "hashAlgo",
+                "nodeType": "VariableDeclaration",
+                "scope": 1003,
+                "src": "345:15:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 999,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "345:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1002,
+                "name": "shared",
+                "nodeType": "VariableDeclaration",
+                "scope": 1003,
+                "src": "371:11:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 1001,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "371:4:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Attribute",
+            "nodeType": "StructDefinition",
+            "scope": 1112,
+            "src": "246:143:3",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 1006,
+            "name": "badgesList",
+            "nodeType": "VariableDeclaration",
+            "scope": 1112,
+            "src": "395:19:3",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_string_storage_$dyn_storage",
+              "typeString": "string[]"
+            },
+            "typeName": {
+              "baseType": {
+                "id": 1004,
+                "name": "string",
+                "nodeType": "ElementaryTypeName",
+                "src": "395:6:3",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                }
+              },
+              "id": 1005,
+              "length": null,
+              "nodeType": "ArrayTypeName",
+              "src": "395:8:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
+                "typeString": "string[]"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "canonicalName": "TrustRelationship.SignatureStates",
+            "id": 1012,
+            "members": [
+              {
+                "id": 1007,
+                "name": "PENDING",
+                "nodeType": "EnumValue",
+                "src": "443:7:3"
+              },
+              {
+                "id": 1008,
+                "name": "REJECTED",
+                "nodeType": "EnumValue",
+                "src": "452:8:3"
+              },
+              {
+                "id": 1009,
+                "name": "VERIFIED",
+                "nodeType": "EnumValue",
+                "src": "462:8:3"
+              },
+              {
+                "id": 1010,
+                "name": "VALID",
+                "nodeType": "EnumValue",
+                "src": "472:5:3"
+              },
+              {
+                "id": 1011,
+                "name": "TERMINATED",
+                "nodeType": "EnumValue",
+                "src": "479:10:3"
+              }
+            ],
+            "name": "SignatureStates",
+            "nodeType": "EnumDefinition",
+            "src": "420:71:3"
+          },
+          {
+            "canonicalName": "TrustRelationship.BadgeView",
+            "id": 1024,
+            "members": [
+              {
+                "constant": false,
+                "id": 1014,
+                "name": "metadata",
+                "nodeType": "VariableDeclaration",
+                "scope": 1024,
+                "src": "524:14:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_storage_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 1013,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "524:5:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1016,
+                "name": "encoding",
+                "nodeType": "VariableDeclaration",
+                "scope": 1024,
+                "src": "548:15:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 1015,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "548:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1018,
+                "name": "signingKey",
+                "nodeType": "VariableDeclaration",
+                "scope": 1024,
+                "src": "573:18:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 1017,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "573:7:3",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1020,
+                "name": "state",
+                "nodeType": "VariableDeclaration",
+                "scope": 1024,
+                "src": "602:21:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_enum$_SignatureStates_$1012",
+                  "typeString": "enum TrustRelationship.SignatureStates"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 1019,
+                  "name": "SignatureStates",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 1012,
+                  "src": "602:15:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_SignatureStates_$1012",
+                    "typeString": "enum TrustRelationship.SignatureStates"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1023,
+                "name": "attributeList",
+                "nodeType": "VariableDeclaration",
+                "scope": 1024,
+                "src": "633:22:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
+                  "typeString": "string[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 1021,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "633:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "id": 1022,
+                  "length": null,
+                  "nodeType": "ArrayTypeName",
+                  "src": "633:8:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
+                    "typeString": "string[]"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "BadgeView",
+            "nodeType": "StructDefinition",
+            "scope": 1112,
+            "src": "497:165:3",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "TrustRelationship.Badge",
+            "id": 1040,
+            "members": [
+              {
+                "constant": false,
+                "id": 1026,
+                "name": "metadata",
+                "nodeType": "VariableDeclaration",
+                "scope": 1040,
+                "src": "691:14:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_storage_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 1025,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "691:5:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1028,
+                "name": "encoding",
+                "nodeType": "VariableDeclaration",
+                "scope": 1040,
+                "src": "715:15:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 1027,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "715:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1030,
+                "name": "signingKey",
+                "nodeType": "VariableDeclaration",
+                "scope": 1040,
+                "src": "740:18:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 1029,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "740:7:3",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1032,
+                "name": "state",
+                "nodeType": "VariableDeclaration",
+                "scope": 1040,
+                "src": "769:21:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_enum$_SignatureStates_$1012",
+                  "typeString": "enum TrustRelationship.SignatureStates"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 1031,
+                  "name": "SignatureStates",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 1012,
+                  "src": "769:15:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_SignatureStates_$1012",
+                    "typeString": "enum TrustRelationship.SignatureStates"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1035,
+                "name": "attributeList",
+                "nodeType": "VariableDeclaration",
+                "scope": 1040,
+                "src": "823:22:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
+                  "typeString": "string[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 1033,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "823:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "id": 1034,
+                  "length": null,
+                  "nodeType": "ArrayTypeName",
+                  "src": "823:8:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
+                    "typeString": "string[]"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1039,
+                "name": "attributes",
+                "nodeType": "VariableDeclaration",
+                "scope": 1040,
+                "src": "855:40:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_mapping$_t_string_memory_$_t_struct$_Attribute_$1003_storage_$",
+                  "typeString": "mapping(string => struct TrustRelationship.Attribute)"
+                },
+                "typeName": {
+                  "id": 1038,
+                  "keyType": {
+                    "id": 1036,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "864:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "nodeType": "Mapping",
+                  "src": "855:29:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_mapping$_t_string_memory_$_t_struct$_Attribute_$1003_storage_$",
+                    "typeString": "mapping(string => struct TrustRelationship.Attribute)"
+                  },
+                  "valueType": {
+                    "contractScope": null,
+                    "id": 1037,
+                    "name": "Attribute",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 1003,
+                    "src": "874:9:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Attribute_$1003_storage_ptr",
+                      "typeString": "struct TrustRelationship.Attribute"
+                    }
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Badge",
+            "nodeType": "StructDefinition",
+            "scope": 1112,
+            "src": "668:234:3",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 1044,
+            "name": "Badges",
+            "nodeType": "VariableDeclaration",
+            "scope": 1112,
+            "src": "908:32:3",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_string_memory_$_t_struct$_Badge_$1040_storage_$",
+              "typeString": "mapping(string => struct TrustRelationship.Badge)"
+            },
+            "typeName": {
+              "id": 1043,
+              "keyType": {
+                "id": 1041,
+                "name": "string",
+                "nodeType": "ElementaryTypeName",
+                "src": "917:6:3",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "908:25:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_string_memory_$_t_struct$_Badge_$1040_storage_$",
+                "typeString": "mapping(string => struct TrustRelationship.Badge)"
+              },
+              "valueType": {
+                "contractScope": null,
+                "id": 1042,
+                "name": "Badge",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 1040,
+                "src": "927:5:3",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Badge_$1040_storage_ptr",
+                  "typeString": "struct TrustRelationship.Badge"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 1064,
+              "nodeType": "Block",
+              "src": "995:205:3",
+              "statements": [
+                {
+                  "assignments": [
+                    1049
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 1049,
+                      "name": "b",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 1064,
+                      "src": "1005:15:3",
+                      "stateVariable": false,
+                      "storageLocation": "storage",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Badge_$1040_storage_ptr",
+                        "typeString": "struct TrustRelationship.Badge"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 1048,
+                        "name": "Badge",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 1040,
+                        "src": "1005:5:3",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Badge_$1040_storage_ptr",
+                          "typeString": "struct TrustRelationship.Badge"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 1053,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "baseExpression": {
+                      "argumentTypes": null,
+                      "id": 1050,
+                      "name": "Badges",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1044,
+                      "src": "1023:6:3",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_mapping$_t_string_memory_$_t_struct$_Badge_$1040_storage_$",
+                        "typeString": "mapping(string memory => struct TrustRelationship.Badge storage ref)"
+                      }
+                    },
+                    "id": 1052,
+                    "indexExpression": {
+                      "argumentTypes": null,
+                      "id": 1051,
+                      "name": "badgeID",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1046,
+                      "src": "1030:7:3",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    },
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "IndexAccess",
+                    "src": "1023:15:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Badge_$1040_storage",
+                      "typeString": "struct TrustRelationship.Badge storage ref"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "1005:33:3"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "commonType": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        "id": 1059,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 1055,
+                            "name": "msg",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1309,
+                            "src": "1071:3:3",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_message",
+                              "typeString": "msg"
+                            }
+                          },
+                          "id": 1056,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "sender",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": null,
+                          "src": "1071:10:3",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address_payable",
+                            "typeString": "address payable"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "==",
+                        "rightExpression": {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 1057,
+                            "name": "b",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1049,
+                            "src": "1085:1:3",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_Badge_$1040_storage_ptr",
+                              "typeString": "struct TrustRelationship.Badge storage pointer"
+                            }
+                          },
+                          "id": 1058,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "signingKey",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 1030,
+                          "src": "1085:12:3",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "src": "1071:26:3",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "41636365737344656e6965643a2043616c6c6572206973206e6f74207468652064657369676e617465642054727573746564205369676e657221",
+                        "id": 1060,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1111:60:3",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_9d2bffb7a09d8d722714c9e40034752a0f23aca880df2bad319d0952b0ff0703",
+                          "typeString": "literal_string \"AccessDenied: Caller is not the designated Trusted Signer!\""
+                        },
+                        "value": "AccessDenied: Caller is not the designated Trusted Signer!"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_9d2bffb7a09d8d722714c9e40034752a0f23aca880df2bad319d0952b0ff0703",
+                          "typeString": "literal_string \"AccessDenied: Caller is not the designated Trusted Signer!\""
+                        }
+                      ],
+                      "id": 1054,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        1312,
+                        1313
+                      ],
+                      "referencedDeclaration": 1313,
+                      "src": "1049:7:3",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 1061,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1049:132:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 1062,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1049:132:3"
+                },
+                {
+                  "id": 1063,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "1192:1:3"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1065,
+            "name": "isTrustedSigner",
+            "nodeType": "ModifierDefinition",
+            "parameters": {
+              "id": 1047,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1046,
+                  "name": "badgeID",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1065,
+                  "src": "972:21:3",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1045,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "972:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "971:23:3"
+            },
+            "src": "947:253:3",
+            "visibility": "internal"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1077,
+            "name": "BadgeStateResetEvent",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1076,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1067,
+                  "indexed": true,
+                  "name": "ownerKey",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1077,
+                  "src": "1242:24:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1066,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1242:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1069,
+                  "indexed": true,
+                  "name": "signingKey",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1077,
+                  "src": "1268:26:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1068,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1268:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1071,
+                  "indexed": false,
+                  "name": "attrID",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1077,
+                  "src": "1304:13:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1070,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1304:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1073,
+                  "indexed": false,
+                  "name": "badgeID",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1077,
+                  "src": "1319:14:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1072,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1319:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1075,
+                  "indexed": false,
+                  "name": "creationBlock",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1077,
+                  "src": "1335:18:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1074,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1335:4:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1232:127:3"
+            },
+            "src": "1206:154:3"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1089,
+            "name": "AttributeProofChangeEvent",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1088,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1079,
+                  "indexed": true,
+                  "name": "ownerKey",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1089,
+                  "src": "1407:24:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1078,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1407:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1081,
+                  "indexed": true,
+                  "name": "signingKey",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1089,
+                  "src": "1433:26:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1080,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1433:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1083,
+                  "indexed": false,
+                  "name": "attrID",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1089,
+                  "src": "1469:13:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1082,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1469:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1085,
+                  "indexed": false,
+                  "name": "badgeID",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1089,
+                  "src": "1484:14:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1084,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1484:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1087,
+                  "indexed": false,
+                  "name": "creationBlock",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1089,
+                  "src": "1500:18:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1086,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1500:4:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1397:127:3"
+            },
+            "src": "1366:159:3"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1101,
+            "name": "TrustRelationshipSignEvent",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1100,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1091,
+                  "indexed": true,
+                  "name": "ownerKey",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1101,
+                  "src": "1573:24:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1090,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1573:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1093,
+                  "indexed": true,
+                  "name": "signingKey",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1101,
+                  "src": "1599:26:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1092,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1599:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1095,
+                  "indexed": false,
+                  "name": "badgeID",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1101,
+                  "src": "1635:14:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1094,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1635:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1097,
+                  "indexed": false,
+                  "name": "state",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1101,
+                  "src": "1651:21:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_SignatureStates_$1012",
+                    "typeString": "enum TrustRelationship.SignatureStates"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 1096,
+                    "name": "SignatureStates",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 1012,
+                    "src": "1651:15:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_SignatureStates_$1012",
+                      "typeString": "enum TrustRelationship.SignatureStates"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1099,
+                  "indexed": false,
+                  "name": "creationBlock",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1101,
+                  "src": "1674:18:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1098,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1674:4:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1563:135:3"
+            },
+            "src": "1531:168:3"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1111,
+            "name": "TrustRelationshipCreatedEvent",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1110,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1103,
+                  "indexed": true,
+                  "name": "ownerKey",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1111,
+                  "src": "1750:24:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1102,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1750:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1105,
+                  "indexed": true,
+                  "name": "signingKey",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1111,
+                  "src": "1776:26:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1104,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1776:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1107,
+                  "indexed": false,
+                  "name": "badgeID",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1111,
+                  "src": "1812:14:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1106,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1812:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1109,
+                  "indexed": false,
+                  "name": "creationBlock",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1111,
+                  "src": "1828:18:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1108,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1828:4:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1740:112:3"
+            },
+            "src": "1705:148:3"
+          }
+        ],
+        "scope": 1113,
+        "src": "59:1796:3"
+      }
+    ],
+    "src": "0:1856:3"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/eugene/Documents/cryptocurrency/barbell/contracts/TrustRelationship.sol",
+    "exportedSymbols": {
+      "TrustRelationship": [
+        1112
+      ]
+    },
+    "id": 1113,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 980,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:3"
+      },
+      {
+        "id": 981,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "24:33:3"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 1112,
+        "linearizedBaseContracts": [
+          1112
+        ],
+        "name": "TrustRelationship",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "TrustRelationship.Attestation",
+            "id": 992,
+            "members": [
+              {
+                "constant": false,
+                "id": 983,
+                "name": "attrID",
+                "nodeType": "VariableDeclaration",
+                "scope": 992,
+                "src": "122:13:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 982,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "122:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 985,
+                "name": "proof",
+                "nodeType": "VariableDeclaration",
+                "scope": 992,
+                "src": "146:12:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 984,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "146:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 987,
+                "name": "hashAlgo",
+                "nodeType": "VariableDeclaration",
+                "scope": 992,
+                "src": "168:15:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 986,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "168:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 989,
+                "name": "metadata",
+                "nodeType": "VariableDeclaration",
+                "scope": 992,
+                "src": "194:14:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_storage_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 988,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "194:5:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 991,
+                "name": "encoding",
+                "nodeType": "VariableDeclaration",
+                "scope": 992,
+                "src": "218:15:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 990,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "218:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Attestation",
+            "nodeType": "StructDefinition",
+            "scope": 1112,
+            "src": "93:147:3",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "TrustRelationship.Attribute",
+            "id": 1003,
+            "members": [
+              {
+                "constant": false,
+                "id": 994,
+                "name": "metadata",
+                "nodeType": "VariableDeclaration",
+                "scope": 1003,
+                "src": "273:14:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_storage_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 993,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "273:5:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 996,
+                "name": "encoding",
+                "nodeType": "VariableDeclaration",
+                "scope": 1003,
+                "src": "297:15:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 995,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "297:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 998,
+                "name": "proof",
+                "nodeType": "VariableDeclaration",
+                "scope": 1003,
+                "src": "323:12:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 997,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "323:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1000,
+                "name": "hashAlgo",
+                "nodeType": "VariableDeclaration",
+                "scope": 1003,
+                "src": "345:15:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 999,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "345:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1002,
+                "name": "shared",
+                "nodeType": "VariableDeclaration",
+                "scope": 1003,
+                "src": "371:11:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 1001,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "371:4:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Attribute",
+            "nodeType": "StructDefinition",
+            "scope": 1112,
+            "src": "246:143:3",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 1006,
+            "name": "badgesList",
+            "nodeType": "VariableDeclaration",
+            "scope": 1112,
+            "src": "395:19:3",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_string_storage_$dyn_storage",
+              "typeString": "string[]"
+            },
+            "typeName": {
+              "baseType": {
+                "id": 1004,
+                "name": "string",
+                "nodeType": "ElementaryTypeName",
+                "src": "395:6:3",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                }
+              },
+              "id": 1005,
+              "length": null,
+              "nodeType": "ArrayTypeName",
+              "src": "395:8:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
+                "typeString": "string[]"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "canonicalName": "TrustRelationship.SignatureStates",
+            "id": 1012,
+            "members": [
+              {
+                "id": 1007,
+                "name": "PENDING",
+                "nodeType": "EnumValue",
+                "src": "443:7:3"
+              },
+              {
+                "id": 1008,
+                "name": "REJECTED",
+                "nodeType": "EnumValue",
+                "src": "452:8:3"
+              },
+              {
+                "id": 1009,
+                "name": "VERIFIED",
+                "nodeType": "EnumValue",
+                "src": "462:8:3"
+              },
+              {
+                "id": 1010,
+                "name": "VALID",
+                "nodeType": "EnumValue",
+                "src": "472:5:3"
+              },
+              {
+                "id": 1011,
+                "name": "TERMINATED",
+                "nodeType": "EnumValue",
+                "src": "479:10:3"
+              }
+            ],
+            "name": "SignatureStates",
+            "nodeType": "EnumDefinition",
+            "src": "420:71:3"
+          },
+          {
+            "canonicalName": "TrustRelationship.BadgeView",
+            "id": 1024,
+            "members": [
+              {
+                "constant": false,
+                "id": 1014,
+                "name": "metadata",
+                "nodeType": "VariableDeclaration",
+                "scope": 1024,
+                "src": "524:14:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_storage_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 1013,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "524:5:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1016,
+                "name": "encoding",
+                "nodeType": "VariableDeclaration",
+                "scope": 1024,
+                "src": "548:15:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 1015,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "548:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1018,
+                "name": "signingKey",
+                "nodeType": "VariableDeclaration",
+                "scope": 1024,
+                "src": "573:18:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 1017,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "573:7:3",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1020,
+                "name": "state",
+                "nodeType": "VariableDeclaration",
+                "scope": 1024,
+                "src": "602:21:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_enum$_SignatureStates_$1012",
+                  "typeString": "enum TrustRelationship.SignatureStates"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 1019,
+                  "name": "SignatureStates",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 1012,
+                  "src": "602:15:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_SignatureStates_$1012",
+                    "typeString": "enum TrustRelationship.SignatureStates"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1023,
+                "name": "attributeList",
+                "nodeType": "VariableDeclaration",
+                "scope": 1024,
+                "src": "633:22:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
+                  "typeString": "string[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 1021,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "633:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "id": 1022,
+                  "length": null,
+                  "nodeType": "ArrayTypeName",
+                  "src": "633:8:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
+                    "typeString": "string[]"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "BadgeView",
+            "nodeType": "StructDefinition",
+            "scope": 1112,
+            "src": "497:165:3",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "TrustRelationship.Badge",
+            "id": 1040,
+            "members": [
+              {
+                "constant": false,
+                "id": 1026,
+                "name": "metadata",
+                "nodeType": "VariableDeclaration",
+                "scope": 1040,
+                "src": "691:14:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_storage_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 1025,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "691:5:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1028,
+                "name": "encoding",
+                "nodeType": "VariableDeclaration",
+                "scope": 1040,
+                "src": "715:15:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 1027,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "715:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1030,
+                "name": "signingKey",
+                "nodeType": "VariableDeclaration",
+                "scope": 1040,
+                "src": "740:18:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 1029,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "740:7:3",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1032,
+                "name": "state",
+                "nodeType": "VariableDeclaration",
+                "scope": 1040,
+                "src": "769:21:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_enum$_SignatureStates_$1012",
+                  "typeString": "enum TrustRelationship.SignatureStates"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 1031,
+                  "name": "SignatureStates",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 1012,
+                  "src": "769:15:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_SignatureStates_$1012",
+                    "typeString": "enum TrustRelationship.SignatureStates"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1035,
+                "name": "attributeList",
+                "nodeType": "VariableDeclaration",
+                "scope": 1040,
+                "src": "823:22:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
+                  "typeString": "string[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 1033,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "823:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "id": 1034,
+                  "length": null,
+                  "nodeType": "ArrayTypeName",
+                  "src": "823:8:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
+                    "typeString": "string[]"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1039,
+                "name": "attributes",
+                "nodeType": "VariableDeclaration",
+                "scope": 1040,
+                "src": "855:40:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_mapping$_t_string_memory_$_t_struct$_Attribute_$1003_storage_$",
+                  "typeString": "mapping(string => struct TrustRelationship.Attribute)"
+                },
+                "typeName": {
+                  "id": 1038,
+                  "keyType": {
+                    "id": 1036,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "864:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "nodeType": "Mapping",
+                  "src": "855:29:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_mapping$_t_string_memory_$_t_struct$_Attribute_$1003_storage_$",
+                    "typeString": "mapping(string => struct TrustRelationship.Attribute)"
+                  },
+                  "valueType": {
+                    "contractScope": null,
+                    "id": 1037,
+                    "name": "Attribute",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 1003,
+                    "src": "874:9:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Attribute_$1003_storage_ptr",
+                      "typeString": "struct TrustRelationship.Attribute"
+                    }
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Badge",
+            "nodeType": "StructDefinition",
+            "scope": 1112,
+            "src": "668:234:3",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 1044,
+            "name": "Badges",
+            "nodeType": "VariableDeclaration",
+            "scope": 1112,
+            "src": "908:32:3",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_string_memory_$_t_struct$_Badge_$1040_storage_$",
+              "typeString": "mapping(string => struct TrustRelationship.Badge)"
+            },
+            "typeName": {
+              "id": 1043,
+              "keyType": {
+                "id": 1041,
+                "name": "string",
+                "nodeType": "ElementaryTypeName",
+                "src": "917:6:3",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "908:25:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_string_memory_$_t_struct$_Badge_$1040_storage_$",
+                "typeString": "mapping(string => struct TrustRelationship.Badge)"
+              },
+              "valueType": {
+                "contractScope": null,
+                "id": 1042,
+                "name": "Badge",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 1040,
+                "src": "927:5:3",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Badge_$1040_storage_ptr",
+                  "typeString": "struct TrustRelationship.Badge"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 1064,
+              "nodeType": "Block",
+              "src": "995:205:3",
+              "statements": [
+                {
+                  "assignments": [
+                    1049
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 1049,
+                      "name": "b",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 1064,
+                      "src": "1005:15:3",
+                      "stateVariable": false,
+                      "storageLocation": "storage",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Badge_$1040_storage_ptr",
+                        "typeString": "struct TrustRelationship.Badge"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 1048,
+                        "name": "Badge",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 1040,
+                        "src": "1005:5:3",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Badge_$1040_storage_ptr",
+                          "typeString": "struct TrustRelationship.Badge"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 1053,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "baseExpression": {
+                      "argumentTypes": null,
+                      "id": 1050,
+                      "name": "Badges",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1044,
+                      "src": "1023:6:3",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_mapping$_t_string_memory_$_t_struct$_Badge_$1040_storage_$",
+                        "typeString": "mapping(string memory => struct TrustRelationship.Badge storage ref)"
+                      }
+                    },
+                    "id": 1052,
+                    "indexExpression": {
+                      "argumentTypes": null,
+                      "id": 1051,
+                      "name": "badgeID",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1046,
+                      "src": "1030:7:3",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    },
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "IndexAccess",
+                    "src": "1023:15:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Badge_$1040_storage",
+                      "typeString": "struct TrustRelationship.Badge storage ref"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "1005:33:3"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "commonType": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        "id": 1059,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 1055,
+                            "name": "msg",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1309,
+                            "src": "1071:3:3",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_message",
+                              "typeString": "msg"
+                            }
+                          },
+                          "id": 1056,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "sender",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": null,
+                          "src": "1071:10:3",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address_payable",
+                            "typeString": "address payable"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "==",
+                        "rightExpression": {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 1057,
+                            "name": "b",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1049,
+                            "src": "1085:1:3",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_Badge_$1040_storage_ptr",
+                              "typeString": "struct TrustRelationship.Badge storage pointer"
+                            }
+                          },
+                          "id": 1058,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "signingKey",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 1030,
+                          "src": "1085:12:3",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "src": "1071:26:3",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "41636365737344656e6965643a2043616c6c6572206973206e6f74207468652064657369676e617465642054727573746564205369676e657221",
+                        "id": 1060,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1111:60:3",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_9d2bffb7a09d8d722714c9e40034752a0f23aca880df2bad319d0952b0ff0703",
+                          "typeString": "literal_string \"AccessDenied: Caller is not the designated Trusted Signer!\""
+                        },
+                        "value": "AccessDenied: Caller is not the designated Trusted Signer!"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_9d2bffb7a09d8d722714c9e40034752a0f23aca880df2bad319d0952b0ff0703",
+                          "typeString": "literal_string \"AccessDenied: Caller is not the designated Trusted Signer!\""
+                        }
+                      ],
+                      "id": 1054,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        1312,
+                        1313
+                      ],
+                      "referencedDeclaration": 1313,
+                      "src": "1049:7:3",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 1061,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1049:132:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 1062,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1049:132:3"
+                },
+                {
+                  "id": 1063,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "1192:1:3"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1065,
+            "name": "isTrustedSigner",
+            "nodeType": "ModifierDefinition",
+            "parameters": {
+              "id": 1047,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1046,
+                  "name": "badgeID",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1065,
+                  "src": "972:21:3",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1045,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "972:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "971:23:3"
+            },
+            "src": "947:253:3",
+            "visibility": "internal"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1077,
+            "name": "BadgeStateResetEvent",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1076,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1067,
+                  "indexed": true,
+                  "name": "ownerKey",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1077,
+                  "src": "1242:24:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1066,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1242:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1069,
+                  "indexed": true,
+                  "name": "signingKey",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1077,
+                  "src": "1268:26:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1068,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1268:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1071,
+                  "indexed": false,
+                  "name": "attrID",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1077,
+                  "src": "1304:13:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1070,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1304:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1073,
+                  "indexed": false,
+                  "name": "badgeID",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1077,
+                  "src": "1319:14:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1072,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1319:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1075,
+                  "indexed": false,
+                  "name": "creationBlock",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1077,
+                  "src": "1335:18:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1074,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1335:4:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1232:127:3"
+            },
+            "src": "1206:154:3"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1089,
+            "name": "AttributeProofChangeEvent",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1088,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1079,
+                  "indexed": true,
+                  "name": "ownerKey",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1089,
+                  "src": "1407:24:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1078,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1407:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1081,
+                  "indexed": true,
+                  "name": "signingKey",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1089,
+                  "src": "1433:26:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1080,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1433:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1083,
+                  "indexed": false,
+                  "name": "attrID",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1089,
+                  "src": "1469:13:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1082,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1469:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1085,
+                  "indexed": false,
+                  "name": "badgeID",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1089,
+                  "src": "1484:14:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1084,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1484:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1087,
+                  "indexed": false,
+                  "name": "creationBlock",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1089,
+                  "src": "1500:18:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1086,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1500:4:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1397:127:3"
+            },
+            "src": "1366:159:3"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1101,
+            "name": "TrustRelationshipSignEvent",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1100,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1091,
+                  "indexed": true,
+                  "name": "ownerKey",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1101,
+                  "src": "1573:24:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1090,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1573:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1093,
+                  "indexed": true,
+                  "name": "signingKey",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1101,
+                  "src": "1599:26:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1092,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1599:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1095,
+                  "indexed": false,
+                  "name": "badgeID",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1101,
+                  "src": "1635:14:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1094,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1635:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1097,
+                  "indexed": false,
+                  "name": "state",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1101,
+                  "src": "1651:21:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_SignatureStates_$1012",
+                    "typeString": "enum TrustRelationship.SignatureStates"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 1096,
+                    "name": "SignatureStates",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 1012,
+                    "src": "1651:15:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_SignatureStates_$1012",
+                      "typeString": "enum TrustRelationship.SignatureStates"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1099,
+                  "indexed": false,
+                  "name": "creationBlock",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1101,
+                  "src": "1674:18:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1098,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1674:4:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1563:135:3"
+            },
+            "src": "1531:168:3"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1111,
+            "name": "TrustRelationshipCreatedEvent",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1110,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1103,
+                  "indexed": true,
+                  "name": "ownerKey",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1111,
+                  "src": "1750:24:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1102,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1750:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1105,
+                  "indexed": true,
+                  "name": "signingKey",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1111,
+                  "src": "1776:26:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1104,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1776:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1107,
+                  "indexed": false,
+                  "name": "badgeID",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1111,
+                  "src": "1812:14:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1106,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1812:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1109,
+                  "indexed": false,
+                  "name": "creationBlock",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1111,
+                  "src": "1828:18:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1108,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1828:4:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1740:112:3"
+            },
+            "src": "1705:148:3"
+          }
+        ],
+        "scope": 1113,
+        "src": "59:1796:3"
+      }
+    ],
+    "src": "0:1856:3"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.8+commit.23d335f2.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.14",
+  "updatedAt": "2020-09-07T09:58:10.125Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

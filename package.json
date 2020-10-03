@@ -1,0 +1,23 @@
+{
+  "name": "barbell",
+  "version": "1.0.0",
+  "description": "* https://www.toptal.com/ethereum/create-erc20-token-tutorial * https://programtheblockchain.com/posts/2017/12/15/writing-a-contract-that-handles-ether/ * https://ethereumdev.io/transfers-and-approval-or-erc20-tokens-from-a-solidity-smart-contract",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eugenekadish/barbell.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eugenekadish/barbell/issues"
+  },
+  "homepage": "https://github.com/eugenekadish/barbell#readme"
+}
