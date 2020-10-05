@@ -21,42 +21,67 @@ contract('Option', (accounts) => {
             tokenInstance = await Token.new(482, { from: tokenAdmin, gasPrice: 400 });
             optionInstance = await Option.new(tokenInstance.address, { from: marketMaker, gasPrice: 400 });
 
-            // console.log(optionInstance);
-            console.log(optionInstance.address);
+            const transfer = await tokenInstance.transfer(marketMaker, 116);
 
-            const approve = await tokenInstance.approve(optionInstance.address, 1000); // Can sell 10 contracts
+            receipt = transfer.receipt;
+
+            console.log(` * Block hash ${receipt.blockHash.substring(0, 8)}`);
+            console.log(` * Transaction hash ${receipt.transactionHash.substring(0, 8)}`);
+
+            const approve = await tokenInstance.approve(optionInstance.address, 100, { from: marketMaker, gasPrice: 400 });
 
             receipt = approve.receipt;
 
             console.log(` * Block hash ${receipt.blockHash.substring(0, 8)}`);
             console.log(` * Transaction hash ${receipt.transactionHash.substring(0, 8)}`);
-
-            allowance = await tokenInstance.allowance(marketMaker, optionInstance.address);
-
-            console.log(` * Allowance ${allowance}`);
-
-            const transferFrom = await tokenInstance.transferFrom(marketMaker, optionInstance.address, 1000);
-
-            receipt = transferFrom.receipt;
-
-            console.log(` * Block hash ${receipt.blockHash.substring(0, 8)}`);
-            console.log(` * Transaction hash ${receipt.transactionHash.substring(0, 8)}`);
-
-            allowance = await tokenInstance.allowance(marketMaker, optionInstance.address);
-
-            console.log(` * Allowance ${allowance}`);
-
-            console.log(' = = = = = = = = = = = = = = = = = = ');
         });
 
         it('...should have transfered correct amount',
             async (/* done */) => {
 
+                const balance = await tokenInstance.balanceOf(optionInstance.address);
+
+                console.log(` * Balance of ${balance}`);
+
+                const issue = await optionInstance.issue(optionBuyer, 28, 0, 6, 2, 4, { from: marketMaker, gasPrice: 400 });
+
+                receipt = issue.receipt;
+
+                console.log(` * Block hash ${receipt.blockHash.substring(0, 8)}`);
+                console.log(` * Transaction hash ${receipt.transactionHash.substring(0, 8)}`);
 
                 // done();
             });
 
         // it('...should have transfered correct amount',
+
+        // // console.log(optionInstance);
+        // console.log(optionInstance.address);
+
+        // const approve = await tokenInstance.approve(optionInstance.address, 1000); // Can sell 10 contracts
+
+        // receipt = approve.receipt;
+
+        // console.log(` * Block hash ${receipt.blockHash.substring(0, 8)}`);
+        // console.log(` * Transaction hash ${receipt.transactionHash.substring(0, 8)}`);
+
+        // allowance = await tokenInstance.allowance(marketMaker, optionInstance.address);
+
+        // console.log(` * Allowance ${allowance}`);
+
+        // const transferFrom = await tokenInstance.transferFrom(marketMaker, optionInstance.address, 1000);
+
+        // receipt = transferFrom.receipt;
+
+        // console.log(` * Block hash ${receipt.blockHash.substring(0, 8)}`);
+        // console.log(` * Transaction hash ${receipt.transactionHash.substring(0, 8)}`);
+
+        // allowance = await tokenInstance.allowance(marketMaker, optionInstance.address);
+
+        // console.log(` * Allowance ${allowance}`);
+
+        // console.log(' = = = = = = = = = = = = = = = = = = ');
+
         //     async (/* done */) => {
 
         //         let receipt, transfer, totalSupply, adminBalance, buyerBalance;

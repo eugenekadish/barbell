@@ -1,81 +1,87 @@
-pragma solidity ^0.5.0;
-pragma experimental ABIEncoderV2;
+// SPDX-License-Identifier: MIT
 
-contract TrustRelationship {
+pragma solidity ^0.7.0;
 
-    struct Attestation {
-        string attrID;
+// // pragma experimental ABIEncoderV2;
 
-        string proof;
-        string hashAlgo;
+// contract TrustRelationship {
+//     struct Attestation {
+//         string attrID;
+//         string proof;
+//         string hashAlgo;
+//         bytes metadata;
+//         string encoding;
+//     }
 
-        bytes metadata;
-        string encoding;
-    }
+//     struct Attribute {
+//         bytes metadata;
+//         string encoding;
+//         string proof;
+//         string hashAlgo;
+//         bool shared;
+//     }
 
-    struct Attribute {
-        bytes metadata;
-        string encoding;
+//     string[] badgesList;
+//     enum SignatureStates {PENDING, REJECTED, VERIFIED, VALID, TERMINATED}
 
-        string proof;
-        string hashAlgo;
+//     struct BadgeView {
+//         bytes metadata;
+//         string encoding;
+//         address signingKey;
+//         SignatureStates state;
+//         string[] attributeList;
+//     }
 
-        bool shared;
-    }
+//     struct Badge {
+//         bytes metadata;
+//         string encoding;
+//         address signingKey;
+//         SignatureStates state; // default is PENDING
+//         string[] attributeList;
+//         mapping(string => Attribute) attributes;
+//     }
 
-    string[] badgesList;
-    enum SignatureStates { PENDING, REJECTED, VERIFIED, VALID, TERMINATED }
+//     mapping(string => Badge) Badges;
 
-    struct BadgeView {
-        bytes metadata;
-        string encoding;
-        address signingKey;
+//     modifier isTrustedSigner(string memory badgeID) {
+//         Badge storage b = Badges[badgeID];
 
-        SignatureStates state;
-        string[] attributeList;
-    }
+//         require(
+//             msg.sender == b.signingKey,
+//             "AccessDenied: Caller is not the designated Trusted Signer!"
+//         );
 
-    struct Badge {
-        bytes metadata;
-        string encoding;
-        address signingKey;
+//         _;
+//     }
 
-        SignatureStates state; // default is PENDING
+//     event BadgeStateResetEvent(
+//         address indexed ownerKey,
+//         address indexed signingKey,
+//         string attrID,
+//         string badgeID,
+//         uint256 creationBlock
+//     );
 
-        string[] attributeList;
-        mapping (string => Attribute) attributes;
-    }
+//     event AttributeProofChangeEvent(
+//         address indexed ownerKey,
+//         address indexed signingKey,
+//         string attrID,
+//         string badgeID,
+//         uint256 creationBlock
+//     );
 
-    mapping (string => Badge) Badges;
+//     event TrustRelationshipSignEvent(
+//         address indexed ownerKey,
+//         address indexed signingKey,
+//         string badgeID,
+//         SignatureStates state,
+//         uint256 creationBlock
+//     );
 
-    modifier isTrustedSigner(string memory badgeID) {
-        Badge storage b = Badges[badgeID];
-
-        require (
-            msg.sender == b.signingKey,
-            "AccessDenied: Caller is not the designated Trusted Signer!"
-        );
-
-        _;
-    }
-
-    event BadgeStateResetEvent(
-        address indexed ownerKey, address indexed signingKey,
-        string attrID, string badgeID, uint creationBlock
-    );
-
-    event AttributeProofChangeEvent(
-        address indexed ownerKey, address indexed signingKey,
-        string attrID, string badgeID, uint creationBlock
-    );
-
-    event TrustRelationshipSignEvent(
-        address indexed ownerKey, address indexed signingKey,
-        string badgeID, SignatureStates state, uint creationBlock
-    );
-
-    event TrustRelationshipCreatedEvent(
-        address indexed ownerKey, address indexed signingKey,
-        string badgeID, uint creationBlock
-    );
-}
+//     event TrustRelationshipCreatedEvent(
+//         address indexed ownerKey,
+//         address indexed signingKey,
+//         string badgeID,
+//         uint256 creationBlock
+//     );
+// }

@@ -1,9 +1,11 @@
-pragma solidity ^0.5.0;
+// SPDX-License-Identifier: MIT
+
+pragma solidity ^0.7.0;
 
 contract Oracle {
     address private underlying;
 
-    constructor(address _underlying) public {
+    constructor(address _underlying) {
         underlying = _underlying;
         // underlying = Token(_underlying)
     }

@@ -19,7 +19,7 @@ module.exports = {
       // }
     }
   },
-  // compilers: {solc: {version: '0.5.4'}},
+  compilers: { solc: { version: '0.7.2' } },
 
   mocha: { bail: true, useColors: true }
 };

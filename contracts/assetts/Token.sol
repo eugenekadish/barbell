@@ -1,4 +1,6 @@
-pragma solidity ^0.5.0;
+// SPDX-License-Identifier: MIT
+
+pragma solidity ^0.7.0;
 
 // pragma experimental ABIEncoderV2;
 // https://gist.github.com/giladHaimov/8e81dbde10c9aeff69a1d683ed6870be#file-basicerc20-sol
@@ -23,7 +25,7 @@ contract Token {
 
     // using SafeMath for uint256;
 
-    constructor(uint256 _total) public {
+    constructor(uint256 _total) {
         total = _total;
         balances[msg.sender] = total;
     }
