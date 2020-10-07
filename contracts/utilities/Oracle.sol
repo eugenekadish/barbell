@@ -11,8 +11,9 @@ contract Oracle {
     }
 
     function priceAtBlock(uint256 blockNumber) public view returns (uint256) {
-        require(blockNumber < block.number, "unknown price of future block");
+        // require(blockNumber < block.number, "unknown price of future block");
 
-        return (uint256(blockhash(blockNumber)) % 10) + 1;
+        return 6;
+        // return (uint256(blockhash(blockNumber)) % 10) + 1;
     }
 }

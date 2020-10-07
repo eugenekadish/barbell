@@ -15,6 +15,14 @@ contract('Option', (accounts) => {
             optionAdmin = accounts[2];
             optionBuyer = accounts[3];
 
+            const blockNumber = await web3.eth.getBlockNumber();
+            const tokenAdminBalance = await web3.eth.getBalance(tokenAdmin);
+
+            console.log(blockNumber);
+            console.log(tokenAdminBalance);
+
+            console.log(' = = = = = = = = = = = = = = = = = = = ');
+
             // tokenInstance = await Token.at(0x3f80fe03f80fe03f80fe03f80fe03f8);
             // tokenInstance = await Token.at(0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599);
 
@@ -43,7 +51,7 @@ contract('Option', (accounts) => {
 
                 console.log(` * Balance of ${balance}`);
 
-                const issue = await optionInstance.issue(optionBuyer, 28, 0, 6, 2, 4, { from: marketMaker, gasPrice: 400 });
+                const issue = await optionInstance.issue(optionBuyer, 28, 0, 6, 4, 8, { from: marketMaker, gasPrice: 400 });
 
                 receipt = issue.receipt;
 

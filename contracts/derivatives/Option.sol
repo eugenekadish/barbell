@@ -9,6 +9,7 @@ import "../utilities/Oracle.sol";
 import "../interfaces/IERC20Token.sol";
 
 contract Option {
+
     // TODO: Keep a seperate list of all the contracts. The market maker can
     // periodically go through delete all the worthless contracts and settle
     // the delegates with the underlying.
@@ -43,12 +44,9 @@ contract Option {
     Oracle private oracle;
     IERC20Token private underlying;
 
-    address payable private marketMaker;
+    uint256 private issued;
+    address private marketMaker;
 
-    uint256 issued;
-
-    // * Function with owner address that can buy tokens
-    // * Admin needs to have bought tokens ahead of time
 
     constructor(address _underlying) {
         marketMaker = msg.sender;
@@ -66,22 +64,21 @@ contract Option {
         uint256 quantity
     ) public {
         issued = issued + 10 * quantity;
-        uint256 claimBlock = block.number + 10;
 
         require(
-            expiryBlock - claimBlock > 28,
+            expiryBlock > block.number,
             "insufficient contract duration"
         );
 
         require(
-            underlying.balanceOf(address(this)) > issued,
+            underlying.allowance(marketMaker, address(this)) > issued,
             "insufficient underlying reserve to issue more tokens"
         );
 
         // TODO: Additional logic can be used to offset calls and Puts at the
         // same strike price.
 
-        Asset memory a = Asset(claimBlock, expiryBlock, strike);
+        Asset memory a = Asset(block.number, expiryBlock, strike);
         Order memory o = Order(buyer, msg.sender, price, quantity, a);
 
         orders[keccak256(abi.encodePacked("TOK", expiryBlock, t, strike))] = o;
@@ -92,114 +89,41 @@ contract Option {
         OptType t,
         uint256 strike
     ) public payable {
-        // provided all conditions are satisfied (in the money, etc.) pay the
-        // market maker and transfer ether from the buyer to the market maker
-
         Order storage o = orders[keccak256(
             abi.encodePacked("TOK", expiryBlock, t, strike)
         )];
 
         require(o.asset.claimBlock < block.number, "contract is not active");
 
-        require(
-            underlying.balanceOf(address(this)) > o.quantity,
-            "insufficient balance of the underlying"
-        );
+        // require(
+        //     underlying.allowance(marketMaker, address(this)) > issued,
+        //     "insufficient underlying reserve to issue more tokens"
+        // );
 
         require(
             msg.value > o.quantity * strike,
             "insufficient funds for settle"
         );
 
+        // NOTE: https://github.com/ConsenSys/smart-contract-best-practices/blob/master/docs/recommendations.md#handle-errors-in-external-calls
+        
         require(
-            underlying.transferFrom(address(this), msg.sender, 100),
+            underlying.transferFrom(address(this), msg.sender, o.quantity),
             "transfer failed"
         );
 
-        marketMaker.transfer(o.quantity * strike);
+        // https://solidity.readthedocs.io/en/v0.7.2/050-breaking-changes.html#semantic-and-syntactic-changes
+        // https://ethereum.stackexchange.com/questions/64567/unused-variables-warning-in-address-call-return-tuple-bool-bytes-memory
+
+        // (bool success, bytes memory res) = address(underlying).call(abi.encodeWithSignature("transferFrom(address, address, uint256) public returns (bool)", address(this), msg.sender, o.quantity));
+
+        // uint(res)
+
+        // require(
+        //     success,
+        //     "transfer failed"
+        // );
     }
 
-    // function buyToOpen(
-    //     uint256 expiryBlock,
-    //     OptType t,
-    //     uint256 strike,
-    //     uint256 quantity
-    // ) public {
-    //     Order storage o = orders[keccak256(
-    //         abi.encodePacked("TOK", expiryBlock, t, strike)
-    //     )];
-
-    //     require(o.asset.claimBlock < block.number, "contract is not active");
-
-    //     require(
-    //         underlying.balanceOf(address(this)) > o.quantity,
-    //         "insufficient balance of the underlying"
-    //     );
-
-    //     require(
-    //         msg.value > o.quantity * o.price,
-    //         "insufficient funds for settle"
-    //     );
-
-    //     marketMaker.transfer(o.quantity * o.price);
-    // }
-
-    // function sellToClose(uint _amount, uint _expiry) public {
-
-    //     //
-
-    //     // balances[msg.sender]
-    // }
-
-    // function settlePut(uint expiryBlock, uint strikePrice) public returns (bool) {
-
-    //     Transfer t = pending[sha3(abi.encodePacked("TOK", expiryBlock, OptType.P, strikePrice))];
-
-    //     require(t.expiryBlock == expiryBlock, "wrong contract");
-
-    //     uint sp = oracle.priceAtBlock(expiryBlock);
-
-    //     require(t.strikePrice < sp, "contract is worthless");
-
-    //     msg.sender.transfer(t.numContracts * strikePrice) // TODO: Check if this succeeds
-    // }
-
-    // function settleCall(uint expiryBlock, uint strikePrice) {
-
-    //     // TODO: Call Oracle to get token price at a specified block
-
-    //     Transfer t = pending[sha3(abi.encodePacked("TOK", expiryBlock, OptType.C, strikePrice))];
-
-    //     require(condition);
-
-    //     // TODO: Check the option expired
-
-    //     // TODO: Check the strike price was correct at the time of expiration
-
-    //     // TODO: Transfer tokens from the contract to the buyer
-    // }
-
-    // function approve(address delegate, uint numOpts, uint strike, uint expiryBlock) public returns (bool) {
-
-    //     uint minBlock = block.number + 10;
-
-    //     require(expiryBlock - minBlock > 28, "insuffecient contract duration");
-    //     require(numTokens <= balances[msg.sender], "sender has insufficient funds");
-
-    //     // TODO: Check this contract owns enough of the underlying
-
-    //     pending[delegate] = Transfer(msg.sender, minBlock, expiryBlock, strike, numOpts)
-    // }
-
-    // function settle() public {
-
-    //     // * msg.value = strike * _amount
-
-    //     // transfer the number of tokens in the sender's vault to the user's address
-    // }
-
-    // function addUnderlying() public {
-
-    //     // user ERC20 interfase and transfer
-    // }
+    // TODO: Add a function to allow the market maker to withdraw funds
 }
