@@ -38,12 +38,12 @@ contract("SimpleStorage", accounts => {
 
             console.log(` * Get: ${get}`);
 
-            // const transfer = await tokenInstance.transfer(marketMaker, 116);
+            const setAndGet = await runnerInstance.setAndGet(8);
 
-            // receipt = transfer.receipt;
+            receipt = setAndGet.receipt;
 
-            // console.log(` * Block hash ${receipt.blockHash.substring(0, 8)}`);
-            // console.log(` * Transaction hash ${receipt.transactionHash.substring(0, 8)}`);
+            console.log(` * Block hash ${receipt.blockHash.substring(0, 8)}`);
+            console.log(` * Transaction hash ${receipt.transactionHash.substring(0, 8)}`);
 
             // const approve = await tokenInstance.approve(optionInstance.address, 100, { from: marketMaker, gasPrice: 400 });
 

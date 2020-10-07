@@ -18,4 +18,14 @@ contract FunRunner {
     function get() public view returns (uint256) {
         return s.get();
     }
+
+    function setAndGet(uint256 x) public {
+        s.set(x);
+
+        require(
+            // x == s.get(),
+            x == s.get(),
+            "data was not updated"
+        );
+    }
 }
