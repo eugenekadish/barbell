@@ -108,8 +108,7 @@ contract Option {
         // );
 
         require(
-            msg.value == 1,
-            // msg.value > o.quantity * strike,
+            msg.value > o.quantity * strike,
             "insufficient funds for settle"
         );
 

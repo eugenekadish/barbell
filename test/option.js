@@ -71,7 +71,7 @@ contract('Option', (accounts) => {
                 console.log(` * Block hash ${receipt.blockHash.substring(0, 8)}`);
                 console.log(` * Transaction hash ${receipt.transactionHash.substring(0, 8)}`);
 
-                const claim = await optionInstance.claim(blockNumber + 42, 0, 16, { from: optionBuyer, gasPrice: 400, value: 1 });
+                const claim = await optionInstance.claim(blockNumber + 42, 0, 16, { from: optionBuyer, gasPrice: 400, value: 65 });
 
                 receipt = claim.receipt;
 
