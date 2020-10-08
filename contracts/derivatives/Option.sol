@@ -10,10 +10,6 @@ import "../interfaces/IERC20Token.sol";
 
 contract Option {
 
-    // TODO: Keep a seperate list of all the contracts. The market maker can
-    // periodically go through delete all the worthless contracts and settle
-    // the delegates with the underlying.
-
     enum OptType {C, P}
 
     struct Vault {
@@ -26,15 +22,20 @@ contract Option {
     struct Asset {
         uint256 claimBlock;
         uint256 expiryBlock;
+        
         uint256 strike;
     }
 
     struct Order {
         address buyer;
         address seller;
+        
         uint256 price;
         uint256 quantity;
+        
         Asset asset;
+
+        // bool claimed;
     }
 
     mapping(bytes32 => Order) orders;
@@ -84,11 +85,17 @@ contract Option {
         orders[keccak256(abi.encodePacked("TOK", expiryBlock, t, strike))] = o;
     }
 
+    // function buyToOpen(
+
+    // ) public {
+    //     address seller,
+    // }
+    
     function claim(
         uint256 expiryBlock,
         OptType t,
         uint256 strike
-    ) public payable {
+    ) public payable { // https://programtheblockchain.com/posts/2017/12/15/writing-a-contract-that-handles-ether/
         Order storage o = orders[keccak256(
             abi.encodePacked("TOK", expiryBlock, t, strike)
         )];
@@ -101,16 +108,15 @@ contract Option {
         // );
 
         require(
-            msg.value > o.quantity * strike,
+            msg.value == 1,
+            // msg.value > o.quantity * strike,
             "insufficient funds for settle"
         );
 
         // NOTE: https://github.com/ConsenSys/smart-contract-best-practices/blob/master/docs/recommendations.md#handle-errors-in-external-calls
-        
-        require(
-            underlying.transferFrom(address(this), msg.sender, o.quantity),
-            "transfer failed"
-        );
+        bool success = underlying.transferFrom(marketMaker, msg.sender, o.quantity);
+
+        require(success, "transfer failed");
 
         // https://solidity.readthedocs.io/en/v0.7.2/050-breaking-changes.html#semantic-and-syntactic-changes
         // https://ethereum.stackexchange.com/questions/64567/unused-variables-warning-in-address-call-return-tuple-bool-bytes-memory

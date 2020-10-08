@@ -42,88 +42,9 @@ contract('Option', (accounts) => {
 
             console.log(` * Block hash ${receipt.blockHash.substring(0, 8)}`);
             console.log(` * Transaction hash ${receipt.transactionHash.substring(0, 8)}`);
+
+            console.log(' = = = = = = = = = = = = = = = = = = = ');
         });
-
-        it('...should have transfered correct amount',
-            async (/* done */) => {
-
-                const balance = await tokenInstance.balanceOf(optionInstance.address);
-
-                console.log(` * Balance of ${balance}`);
-
-                const issue = await optionInstance.issue(optionBuyer, 28, 0, 6, 4, 8, { from: marketMaker, gasPrice: 400 });
-
-                receipt = issue.receipt;
-
-                console.log(` * Block hash ${receipt.blockHash.substring(0, 8)}`);
-                console.log(` * Transaction hash ${receipt.transactionHash.substring(0, 8)}`);
-
-                // done();
-            });
-
-        // it('...should have transfered correct amount',
-
-        // // console.log(optionInstance);
-        // console.log(optionInstance.address);
-
-        // const approve = await tokenInstance.approve(optionInstance.address, 1000); // Can sell 10 contracts
-
-        // receipt = approve.receipt;
-
-        // console.log(` * Block hash ${receipt.blockHash.substring(0, 8)}`);
-        // console.log(` * Transaction hash ${receipt.transactionHash.substring(0, 8)}`);
-
-        // allowance = await tokenInstance.allowance(marketMaker, optionInstance.address);
-
-        // console.log(` * Allowance ${allowance}`);
-
-        // const transferFrom = await tokenInstance.transferFrom(marketMaker, optionInstance.address, 1000);
-
-        // receipt = transferFrom.receipt;
-
-        // console.log(` * Block hash ${receipt.blockHash.substring(0, 8)}`);
-        // console.log(` * Transaction hash ${receipt.transactionHash.substring(0, 8)}`);
-
-        // allowance = await tokenInstance.allowance(marketMaker, optionInstance.address);
-
-        // console.log(` * Allowance ${allowance}`);
-
-        // console.log(' = = = = = = = = = = = = = = = = = = ');
-
-        //     async (/* done */) => {
-
-        //         let receipt, transfer, totalSupply, adminBalance, buyerBalance;
-
-        //         totalSupply = await tokenInstance.totalSupply();
-        //         assert.equal(totalSupply, 284, 'total supply is not \'284\'');
-
-        //         adminBalance = await tokenInstance.balanceOf(tokenAdmin);
-        //         assert.equal(adminBalance, 284, 'admin balance is not \'284\'');
-
-        //         // TODO: Transfer tokens to the smart contract
-        //         // transfer = await tokenInstance.transfer(tokenBuyer, 12, { from: tokenAdmin, gasPrice: 400 });
-
-        //         // console.log(` * ${totalSupply}`);
-        //         // console.log(` * ${adminBalance}`);
-
-        //         // receipt = transfer.receipt;
-
-        //         // console.log(` * Block hash ${receipt.blockHash.substring(0, 8)}`);
-        //         // console.log(` * Transaction hash ${receipt.transactionHash.substring(0, 8)}`);
-
-        //         // for (let log in transfer.logs) {
-        //         //     console.log(` * Log ${log.event}`);
-        //         // }
-
-        //         // adminBalance = await tokenInstance.balanceOf(tokenAdmin);
-        //         // buyerBalance = await tokenInstance.balanceOf(tokenBuyer);
-
-        //         // console.log(` * ${buyerBalance}`);
-        //         // console.log(` * ${adminBalance}`);
-
-        //         // assert.equal(buyerBalance, 12, 'buyer balance is not \'12\'');
-        //         // assert.equal(adminBalance, 272, 'admin balance is not \'272\'');
-        //     });
 
         // it('...should have transfered correct amount',
         //     async (/* done */) => {
@@ -132,5 +53,38 @@ contract('Option', (accounts) => {
 
         //         adminBalance = await tokenInstance.balanceOf(tokenAdmin);
         //     });
+
+        it('...should have transfered correct amount',
+            async (/* done */) => {
+
+                const balance = await tokenInstance.balanceOf(optionInstance.address);
+                const allowance = await tokenInstance.allowance(marketMaker, optionInstance.address);
+
+                console.log(` * Balance of ${balance}`);
+                console.log(` * Allowance of ${allowance}`);
+
+                const blockNumber = await web3.eth.getBlockNumber();
+                const issue = await optionInstance.issue(optionBuyer, blockNumber + 42, 0, 16, 2, 4, { from: marketMaker, gasPrice: 400 });
+
+                receipt = issue.receipt;
+
+                console.log(` * Block hash ${receipt.blockHash.substring(0, 8)}`);
+                console.log(` * Transaction hash ${receipt.transactionHash.substring(0, 8)}`);
+
+                const claim = await optionInstance.claim(blockNumber + 42, 0, 16, { from: optionBuyer, gasPrice: 400, value: 1 });
+
+                receipt = claim.receipt;
+
+                console.log(` * Block hash ${receipt.blockHash.substring(0, 8)}`);
+                console.log(` * Transaction hash ${receipt.transactionHash.substring(0, 8)}`);
+
+                const optionBalance = await web3.eth.getBalance(optionInstance.address);
+                const optionAllowance = await tokenInstance.allowance(marketMaker, optionInstance.address);
+
+                console.log(` * Balance of ${optionBalance}`);
+                console.log(` * Allowance of ${optionAllowance}`);
+
+                // done();
+            });
     });
 });
