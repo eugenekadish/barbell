@@ -19,7 +19,12 @@ module.exports = {
       // }
     }
   },
-  compilers: { solc: { version: '0.7.2' } },
+  compilers: {
+    solc: {
+      version: '0.7.2',
+      evmVersion: 'petersburg'
+    }
+  },
 
   mocha: { bail: true, useColors: true }
 };

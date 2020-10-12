@@ -7,22 +7,17 @@ contract("SimpleStorage", accounts => {
 
         before(async () => {
 
-            // let receipt, allowance = {};
-
             ownerAddr = accounts[0];
             runnerAddr = accounts[1];
-
-            console.log(` * Owner Address: ${ownerAddr}`);
-            console.log(` * Runner Address: ${runnerAddr}`);
 
             storageInstance = await SimpleStorage.new({ from: ownerAddr, gasPrice: 400 });
             runnerInstance = await FunRunner.new(storageInstance.address, { from: runnerAddr, gasPrice: 400 });
 
-            console.log(` * Fun Runner Address: ${runnerInstance.address.substring(0, 8)}`);
-            console.log(` * Fun Runner Transaction Hash: ${runnerInstance.transactionHash.substring(0, 8)}`);
+            console.log(` * Fun Runner Address ${runnerInstance.address.substring(0, 8)}`);
+            // console.log(` * Transaction Hash ${runnerInstance.transactionHash.substring(0, 8)}`);
 
-            console.log(` * Simple Storage Address: ${storageInstance.address.substring(0, 8)}`);
-            console.log(` * Simple StorageTransaction Hash: ${storageInstance.transactionHash.substring(0, 8)}`);
+            console.log(` * Simple Storage Address ${storageInstance.address.substring(0, 8)}`);
+            // console.log(` * Transaction Hash: ${storageInstance.transactionHash.substring(0, 8)}`);
         });
 
         it('...should store and read data', async () => {
@@ -31,8 +26,8 @@ contract("SimpleStorage", accounts => {
 
             receipt = set.receipt;
 
-            console.log(` * Set Block Hash ${receipt.blockHash.substring(0, 8)}`);
-            console.log(` * Set Transaction Hash ${receipt.transactionHash.substring(0, 8)}`);
+            console.log(` * Block Hash ${receipt.blockHash.substring(0, 8)}`);
+            // console.log(` * Transaction Hash ${receipt.transactionHash.substring(0, 8)}`);
 
             const get = await runnerInstance.get();
 
@@ -43,13 +38,6 @@ contract("SimpleStorage", accounts => {
             receipt = setAndGet.receipt;
 
             console.log(` * Block hash ${receipt.blockHash.substring(0, 8)}`);
-            console.log(` * Transaction hash ${receipt.transactionHash.substring(0, 8)}`);
-
-            // const approve = await tokenInstance.approve(optionInstance.address, 100, { from: marketMaker, gasPrice: 400 });
-
-            // receipt = approve.receipt;
-
-            // console.log(` * Block hash ${receipt.blockHash.substring(0, 8)}`);
             // console.log(` * Transaction hash ${receipt.transactionHash.substring(0, 8)}`);
         });
 

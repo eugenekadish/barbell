@@ -5,7 +5,9 @@ const Option = artifacts.require('derivatives/Option.sol');
 
 contract('Option', (accounts) => {
     describe('a deployed contract', () => {
-        let optionInstance, tokenAdmin, tokenInstance, oracleInstance;
+
+        let optionInstance, tokenInstance, oracleInstance;
+        let tokenAdmin, marketMaker, optionAdmin, optionBuyer;
 
         before(async () => {
 
@@ -30,59 +32,118 @@ contract('Option', (accounts) => {
             receipt = transfer.receipt;
 
             console.log(` * Block hash ${receipt.blockHash.substring(0, 8)}`);
-            console.log(` * Transaction hash ${receipt.transactionHash.substring(0, 8)}`);
+            // console.log(` * Transaction hash ${receipt.transactionHash.substring(0, 8)}`);
 
             const approve = await tokenInstance.approve(optionInstance.address, 100, { from: marketMaker, gasPrice: 400 });
 
             receipt = approve.receipt;
 
             console.log(` * Block hash ${receipt.blockHash.substring(0, 8)}`);
-            console.log(` * Transaction hash ${receipt.transactionHash.substring(0, 8)}`);
+            // console.log(` * Transaction hash ${receipt.transactionHash.substring(0, 8)}`);
         });
 
-        // it('...should have transfered correct amount',
-        //     async (/* done */) => {
-
-        //         let adminBalance;
-
-        //         adminBalance = await tokenInstance.balanceOf(tokenAdmin);
-        //     });
-
-        it('...should have transfered correct amount',
+        it('...should transfer tokens',
             async (/* done */) => {
 
-                const balance = await tokenInstance.balanceOf(optionInstance.address);
-                const allowance = await tokenInstance.allowance(marketMaker, optionInstance.address);
+                let receipt;
 
-                console.log(` * Balance of ${balance}`);
-                console.log(` * Allowance of ${allowance}`);
+                let mmEthBalance, mmTokBalance, mmTokAllowance;
+                let oBuyerEthBalance, oBuyerTokBalance, oBuyerTokAllowance;
+
+                let oEthBalance, oTokBalance, oTokAllowance;
 
                 const blockNumber = await web3.eth.getBlockNumber();
+
+                mmEthBalance = await web3.eth.getBalance(marketMaker);
+                oBuyerEthBalance = await web3.eth.getBalance(optionBuyer);
+
+                oEthBalance = await web3.eth.getBalance(optionInstance.address);
+
+                console.log(` * Eth Balance ${mmEthBalance}`);
+                console.log(` * Eth Balance ${oBuyerEthBalance}`);
+
+                console.log(` * Eth Balance ${oEthBalance}`);
+
+                mmTokBalance = await tokenInstance.balanceOf(marketMaker);
+                oBuyerTokBalance = await tokenInstance.balanceOf(optionBuyer);
+
+                oTokBalance = await tokenInstance.balanceOf(optionInstance.address);
+
+                console.log(` * Tok Balance ${mmTokBalance}`);
+                console.log(` * Tok Balance ${oBuyerTokBalance}`);
+
+                console.log(` * Tok Balance ${oTokBalance}`);
+
+                mmTokAllowance = await tokenInstance.allowance(marketMaker, marketMaker);
+                oBuyerTokAllowance = await tokenInstance.allowance(marketMaker, optionBuyer);
+
+                oTokAllowance = await tokenInstance.allowance(marketMaker, optionInstance.address);
+
+                console.log(` * Allowance ${mmTokAllowance}`);
+                console.log(` * Allowance ${oBuyerTokAllowance}`);
+
+                console.log(` * Allowance ${oTokAllowance}`);
+
                 const issue = await optionInstance.issue(optionBuyer, blockNumber + 42, 0, 16, 2, 4, { from: marketMaker, gasPrice: 400 });
 
                 receipt = issue.receipt;
 
                 console.log(` * Block hash ${receipt.blockHash.substring(0, 8)}`);
-                console.log(` * Transaction hash ${receipt.transactionHash.substring(0, 8)}`);
+                // console.log(` * Transaction hash ${receipt.transactionHash.substring(0, 8)}`);
 
                 const claim = await optionInstance.claim(blockNumber + 42, 0, 16, { from: optionBuyer, gasPrice: 400, value: 65 });
 
                 receipt = claim.receipt;
 
                 console.log(` * Block hash ${receipt.blockHash.substring(0, 8)}`);
-                console.log(` * Transaction hash ${receipt.transactionHash.substring(0, 8)}`);
+                // console.log(` * Transaction hash ${receipt.transactionHash.substring(0, 8)}`);
 
-                const optionBalance = await web3.eth.getBalance(optionInstance.address);
-                const optionAllowance = await tokenInstance.allowance(marketMaker, optionInstance.address);
+                mmEthBalance = await web3.eth.getBalance(marketMaker);
+                oBuyerEthBalance = await web3.eth.getBalance(optionBuyer);
 
-                console.log(` * Balance of ${optionBalance}`);
-                console.log(` * Allowance of ${optionAllowance}`);
+                oEthBalance = await web3.eth.getBalance(optionInstance.address);
 
-                const b = await tokenInstance.balanceOf(optionBuyer);
-                const a = await tokenInstance.allowance(marketMaker, optionInstance.address);
+                console.log(` * Eth Balance ${mmEthBalance}`);
+                console.log(` * Eth Balance ${oBuyerEthBalance}`);
 
-                console.log(` * Balance of ${b}`);
-                console.log(` * Allowance of ${a}`);
+                console.log(` * Eth Balance ${oEthBalance}`);
+
+                mmTokBalance = await tokenInstance.balanceOf(marketMaker);
+                oBuyerTokBalance = await tokenInstance.balanceOf(optionBuyer);
+
+                oTokBalance = await tokenInstance.balanceOf(optionInstance.address);
+
+                console.log(` * Tok Balance ${mmTokBalance}`);
+                console.log(` * Tok Balance ${oBuyerTokBalance}`);
+
+                console.log(` * Tok Balance ${oTokBalance}`);
+
+                mmTokAllowance = await tokenInstance.allowance(marketMaker, marketMaker);
+                oBuyerTokAllowance = await tokenInstance.allowance(marketMaker, optionBuyer);
+
+                oTokAllowance = await tokenInstance.allowance(marketMaker, optionInstance.address);
+
+                console.log(` * Allowance ${mmTokAllowance}`);
+                console.log(` * Allowance ${oBuyerTokAllowance}`);
+
+                console.log(` * Allowance ${oTokAllowance}`);
+
+                const withdraw = await optionInstance.withdraw({ from: marketMaker, gasPrice: 400 });
+
+                receipt = withdraw.receipt;
+
+                console.log(` * Block hash ${receipt.blockHash.substring(0, 8)}`);
+                // console.log(` * Transaction hash ${receipt.transactionHash.substring(0, 8)}`);
+
+                mmEthBalance = await web3.eth.getBalance(marketMaker);
+                oBuyerEthBalance = await web3.eth.getBalance(optionBuyer);
+
+                oEthBalance = await web3.eth.getBalance(optionInstance.address);
+
+                console.log(` * Eth Balance ${mmEthBalance}`);
+                console.log(` * Eth Balance ${oBuyerEthBalance}`);
+
+                console.log(` * Eth Balance ${oEthBalance}`);
 
                 // done();
             });

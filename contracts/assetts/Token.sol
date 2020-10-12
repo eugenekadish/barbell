@@ -2,10 +2,7 @@
 
 pragma solidity ^0.7.0;
 
-// pragma experimental ABIEncoderV2;
-// https://gist.github.com/giladHaimov/8e81dbde10c9aeff69a1d683ed6870be#file-basicerc20-sol
-
-contract Token {
+contract Token { // https://gist.github.com/giladHaimov/8e81dbde10c9aeff69a1d683ed6870be#file-basicerc20-sol
     
     // string public constant name = "ERC20Basic";
     // string public constant symbol = "BSC";

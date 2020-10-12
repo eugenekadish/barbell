@@ -1,7 +1,5 @@
-# barbell
+# In The Money
 
-* https://www.toptal.com/ethereum/create-erc20-token-tutorial
-* https://programtheblockchain.com/posts/2017/12/15/writing-a-contract-that-handles-ether/
-* https://ethereumdev.io/transfers-and-approval-or-erc20-tokens-from-a-solidity-smart-contract
+Proof of concept setup for programmatic American style options contracts using the Ethereum fungible token standard [ERC20](https://eips.ethereum.org/EIPS/eip-20) as the underlying. Most of the work is in the unit tests that exercise a basic flow.
 
-* https://ethereum.stackexchange.com/questions/77750/sending-money-through-a-smart-contract
+In the future iterations the option contract should be converted to the [ERC721](https://eips.ethereum.org/EIPS/eip-721) non-fungible token standard.

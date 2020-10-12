@@ -2,8 +2,6 @@
 
 pragma solidity ^0.7.0;
 
-// pragma experimental ABIEncoderV2;
-
 import "../assetts/Token.sol";
 
 import "../interfaces/IOracle.sol";
@@ -35,8 +33,6 @@ contract Option {
         uint256 quantity;
         
         Asset asset;
-
-        // bool claimed;
     }
 
     mapping(bytes32 => Order) orders;
@@ -45,7 +41,7 @@ contract Option {
     IERC20Token private underlying;
 
     uint256 private issued;
-    address private marketMaker;
+    address payable private marketMaker;
 
     constructor(address uAddress, address oAddress) {
         marketMaker = msg.sender;
@@ -85,43 +81,36 @@ contract Option {
 
     // https://ethereum.stackexchange.com/questions/45277/calling-one-contract-to-another-contract-method
     // https://ethereum.stackexchange.com/questions/64567/unused-variables-warning-in-address-call-return-tuple-bool-bytes-memory
-    
-    // function buyToOpen(
 
-    // ) public {
-    //     address seller,
-    // }
-    
     function claim(
         uint256 expiryBlock,
         OptType t,
         uint256 strike
-    ) public payable { // https://programtheblockchain.com/posts/2017/12/15/writing-a-contract-that-handles-ether/
+    ) public payable { // https://programtheblockchain.com/posts/2017/12/15/writing-a-contract-that-handles-ether
         Order storage o = orders[keccak256(
             abi.encodePacked("TOK", expiryBlock, t, strike)
         )];
 
         require(o.asset.claimBlock < block.number, "contract is not active");
 
-        require(oracle.priceAtBlock(block.number) /* 22 */ > strike, "the token price needs to be in the money");
+        require(oracle.priceAtBlock(block.number) > strike, "the token price needs to be in the money");
 
         require(
-            msg.value > o.quantity * strike,
-            "insufficient funds for settle"
+            msg.value > o.quantity * strike, // TODO: Send the difference back to the buyer
+            "insufficient funds to settle"
         );
 
-        // NOTE: https://github.com/ConsenSys/smart-contract-best-practices/blob/master/docs/recommendations.md#handle-errors-in-external-calls
         bool success = underlying.transferFrom(marketMaker, msg.sender, o.quantity);
 
         require(success, "transfer failed");
 
         // https://solidity.readthedocs.io/en/v0.7.2/050-breaking-changes.html#semantic-and-syntactic-changes
         // https://ethereum.stackexchange.com/questions/64567/unused-variables-warning-in-address-call-return-tuple-bool-bytes-memory
+
+        msg.sender.transfer(msg.value - o.quantity * strike);
     }
 
-    // TODO: Add a function to allow the market maker to withdraw funds
-
-    function withdraw() public { // https://github.com/ConsenSys/smart-contract-best-practices/blob/master/docs/recommendations.md#dont-use-transfer-or-send
-        msg.sender.transfer(address(this).balance);
+    function withdraw() public {
+        marketMaker.transfer(address(this).balance);
     }
 }

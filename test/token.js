@@ -8,7 +8,8 @@ contract('Token', (accounts) => {
             tokenAdmin = accounts[0];
             tokenBuyer = accounts[1];
 
-            tokenInstance = await Token.deployed();
+            // tokenInstance = await Token.deployed();
+            tokenInstance = await Token.new(284, { from: tokenAdmin, gasPrice: 400 });
         });
 
         it('...should have expected total supply',
@@ -30,7 +31,7 @@ contract('Token', (accounts) => {
                 receipt = transfer.receipt;
 
                 console.log(` * Block hash ${receipt.blockHash.substring(0, 8)}`);
-                console.log(` * Transaction hash ${receipt.transactionHash.substring(0, 8)}`);
+                // console.log(` * Transaction hash ${receipt.transactionHash.substring(0, 8)}`);
 
                 for (let log in transfer.logs) {
                     console.log(` * Log ${log}`);
@@ -45,13 +46,5 @@ contract('Token', (accounts) => {
                 assert.equal(buyerBalance, 12, 'buyer balance is not \'12\'');
                 assert.equal(adminBalance, 272, 'admin balance is not \'272\'');
             });
-
-        // it('...should have transfered correct amount',
-        //     async (/* done */) => {
-
-        //         let adminBalance;
-
-        //         adminBalance = await tokenInstance.balanceOf(tokenAdmin);
-        //     });
     });
 });
