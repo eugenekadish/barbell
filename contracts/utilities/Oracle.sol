@@ -10,6 +10,10 @@ contract Oracle {
         // underlying = Token(_underlying)
     }
 
+    // function priceAtBlock() public pure returns (uint256) {
+    //     return 22;
+    // }
+
     function priceAtBlock(uint256 blockNumber) public view returns (uint256) {
         // require(blockNumber < block.number, "unknown price of future block");
 

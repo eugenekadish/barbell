@@ -6,6 +6,7 @@ pragma solidity ^0.7.0;
 // https://gist.github.com/giladHaimov/8e81dbde10c9aeff69a1d683ed6870be#file-basicerc20-sol
 
 contract Token {
+    
     // string public constant name = "ERC20Basic";
     // string public constant symbol = "BSC";
     // uint8 public constant decimals = 18;
@@ -54,6 +55,8 @@ contract Token {
 
         return true;
     }
+
+    // https://docs.google.com/document/d/1YLPtQxZu1UAvO9cZ1O2RPXBbT0mooh4DYKjA_jp-RLM/edit#
 
     function approve(address delegate, uint256 numTokens)
         public

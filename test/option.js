@@ -1,13 +1,15 @@
 const Token = artifacts.require('assets/Token.sol');
+
+const Oracle = artifacts.require('utilities/Oracle.sol');
 const Option = artifacts.require('derivatives/Option.sol');
 
 contract('Option', (accounts) => {
     describe('a deployed contract', () => {
-        let optionInstance, tokenAdmin, tokenInstance, tokenBuyer = {};
+        let optionInstance, tokenAdmin, tokenInstance, oracleInstance;
 
         before(async () => {
 
-            let receipt, allowance = {};
+            let receipt;
 
             tokenAdmin = accounts[0];
             marketMaker = accounts[1];
@@ -15,19 +17,13 @@ contract('Option', (accounts) => {
             optionAdmin = accounts[2];
             optionBuyer = accounts[3];
 
-            const blockNumber = await web3.eth.getBlockNumber();
-            const tokenAdminBalance = await web3.eth.getBalance(tokenAdmin);
-
-            console.log(blockNumber);
-            console.log(tokenAdminBalance);
-
-            console.log(' = = = = = = = = = = = = = = = = = = = ');
-
             // tokenInstance = await Token.at(0x3f80fe03f80fe03f80fe03f80fe03f8);
             // tokenInstance = await Token.at(0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599);
 
             tokenInstance = await Token.new(482, { from: tokenAdmin, gasPrice: 400 });
-            optionInstance = await Option.new(tokenInstance.address, { from: marketMaker, gasPrice: 400 });
+            oracleInstance = await Oracle.new(tokenInstance.address, { from: accounts[4], gasPrice: 400 });
+
+            optionInstance = await Option.new(tokenInstance.address, oracleInstance.address, { from: marketMaker, gasPrice: 400 });
 
             const transfer = await tokenInstance.transfer(marketMaker, 116);
 
@@ -42,8 +38,6 @@ contract('Option', (accounts) => {
 
             console.log(` * Block hash ${receipt.blockHash.substring(0, 8)}`);
             console.log(` * Transaction hash ${receipt.transactionHash.substring(0, 8)}`);
-
-            console.log(' = = = = = = = = = = = = = = = = = = = ');
         });
 
         // it('...should have transfered correct amount',
@@ -83,6 +77,12 @@ contract('Option', (accounts) => {
 
                 console.log(` * Balance of ${optionBalance}`);
                 console.log(` * Allowance of ${optionAllowance}`);
+
+                const b = await tokenInstance.balanceOf(optionBuyer);
+                const a = await tokenInstance.allowance(marketMaker, optionInstance.address);
+
+                console.log(` * Balance of ${b}`);
+                console.log(` * Allowance of ${a}`);
 
                 // done();
             });

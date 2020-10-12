@@ -24,7 +24,6 @@ contract FunRunner {
         s.set(x);
 
         require(
-            // x == s.get(),
             x == s.get(),
             "data was not updated"
         );

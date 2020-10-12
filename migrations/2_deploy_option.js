@@ -1,4 +1,4 @@
-const Token = artifacts.require('assets/Token.sol');
+// const Token = artifacts.require('assets/Token.sol');
 // const Option = artifacts.require('derivatives/Option.sol');
 
 // https://ethereum.stackexchange.com/questions/59969/truffle-migrations-same-contract-deployed-multiple-times

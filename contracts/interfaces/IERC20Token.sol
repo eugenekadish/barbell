@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: GPL-3.0
 
 pragma solidity ^0.7.0;
 
@@ -6,6 +6,7 @@ interface IERC20Token {
     // function name() external view returns (string memory);
     // function symbol() external view returns (string memory);
     // function decimals() external view returns (uint8);
+
     function totalSupply() external view returns (uint256);
 
     function balanceOf(address _owner) external view returns (uint256);

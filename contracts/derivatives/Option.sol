@@ -1,11 +1,12 @@
-// SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: GPL-3.0
 
 pragma solidity ^0.7.0;
 
 // pragma experimental ABIEncoderV2;
 
 import "../assetts/Token.sol";
-import "../utilities/Oracle.sol";
+
+import "../interfaces/IOracle.sol";
 import "../interfaces/IERC20Token.sol";
 
 contract Option {
@@ -40,20 +41,17 @@ contract Option {
 
     mapping(bytes32 => Order) orders;
 
-    // address public underlying;
-
-    Oracle private oracle;
+    IOracle private oracle;
     IERC20Token private underlying;
 
     uint256 private issued;
     address private marketMaker;
 
-
-    constructor(address _underlying) {
+    constructor(address uAddress, address oAddress) {
         marketMaker = msg.sender;
 
-        oracle = Oracle(_underlying);
-        underlying = IERC20Token(_underlying);
+        oracle = IOracle(oAddress);
+        underlying = IERC20Token(uAddress);
     }
 
     function issue(
@@ -85,6 +83,9 @@ contract Option {
         orders[keccak256(abi.encodePacked("TOK", expiryBlock, t, strike))] = o;
     }
 
+    // https://ethereum.stackexchange.com/questions/45277/calling-one-contract-to-another-contract-method
+    // https://ethereum.stackexchange.com/questions/64567/unused-variables-warning-in-address-call-return-tuple-bool-bytes-memory
+    
     // function buyToOpen(
 
     // ) public {
@@ -102,10 +103,7 @@ contract Option {
 
         require(o.asset.claimBlock < block.number, "contract is not active");
 
-        // require(
-        //     underlying.allowance(marketMaker, address(this)) > issued,
-        //     "insufficient underlying reserve to issue more tokens"
-        // );
+        require(oracle.priceAtBlock(block.number) /* 22 */ > strike, "the token price needs to be in the money");
 
         require(
             msg.value > o.quantity * strike,
@@ -119,16 +117,11 @@ contract Option {
 
         // https://solidity.readthedocs.io/en/v0.7.2/050-breaking-changes.html#semantic-and-syntactic-changes
         // https://ethereum.stackexchange.com/questions/64567/unused-variables-warning-in-address-call-return-tuple-bool-bytes-memory
-
-        // (bool success, bytes memory res) = address(underlying).call(abi.encodeWithSignature("transferFrom(address, address, uint256) public returns (bool)", address(this), msg.sender, o.quantity));
-
-        // uint(res)
-
-        // require(
-        //     success,
-        //     "transfer failed"
-        // );
     }
 
     // TODO: Add a function to allow the market maker to withdraw funds
+
+    function withdraw() public { // https://github.com/ConsenSys/smart-contract-best-practices/blob/master/docs/recommendations.md#dont-use-transfer-or-send
+        msg.sender.transfer(address(this).balance);
+    }
 }
