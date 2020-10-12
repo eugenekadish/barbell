@@ -34,3 +34,8 @@ services:
       POSTGRES_USER: user
       POSTGRES_DB: data
  
+  ganache:
+    image: trufflesuite/ganache-cli
+    restart: unless-stopped
+    ports:
+      - 8545:8545
